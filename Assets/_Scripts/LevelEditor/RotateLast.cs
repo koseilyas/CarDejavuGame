@@ -1,5 +1,4 @@
-using System;
-using UnityEditor;
+#if UNITY_EDITOR
 using UnityEngine;
 
 namespace LevelEditor
@@ -38,3 +37,4 @@ namespace LevelEditor
         }
     }
 }
+#endif

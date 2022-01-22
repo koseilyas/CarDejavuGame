@@ -1,15 +1,18 @@
+#if UNITY_EDITOR
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace LevelEditor
 {
-    public class LevelEditorManager : MonoBehaviour
+    public class EditorManager : MonoBehaviour
     {
         [SerializeField] private GameObject[] _cars,_flags,_obstacles;
         [SerializeField] private Transform _cloneObstaclesParent;
         [SerializeField] private Button _saveButton, _loadButton;
         [SerializeField] private TMP_Text _logText;
+        [SerializeField] private TMP_InputField _levelInputField;
+        public EditorObjectLoader editorObjectLoader;
 
         private void Start()
         {
@@ -18,7 +21,8 @@ namespace LevelEditor
             SetupObstacles();
             _saveButton.onClick.AddListener(SaveLevel);
             _loadButton.onClick.AddListener(LoadLevel);
-            new LevelEditorLogger(_logText);
+            new EditorLogger(_logText);
+            editorObjectLoader = new EditorObjectLoader(_cars,_flags);
         }
 
         private void SetupCars()
@@ -48,12 +52,45 @@ namespace LevelEditor
         
         private void LoadLevel()
         {
+            int levelNum  = GetLevelInput();
+            if (levelNum > 0)
+            {
+                EditorSaverLoader.Load(levelNum,this);
+            }
+            else
+            {
+                EditorLogger.Log("Input valid levelNumber",true);
+            }
             
         }
 
         private void SaveLevel()
         {
-            LevelSaverLoader.Save();
+            int levelNum  = GetLevelInput();
+            if (!EditorSaverLoader.IsAllCarAndFlagsSet(_cars, _flags))
+            {
+                EditorLogger.Log("Set all cars and flags",true);
+                return;
+            }
+            if(levelNum > 0)
+            {
+                EditorSaverLoader.Save(_cars,_flags,_cloneObstaclesParent,levelNum);
+            }
+            else
+            {
+                EditorLogger.Log("Input valid levelNumber",true);
+            }
+        }
+
+        private int GetLevelInput()
+        {
+            if (int.TryParse(_levelInputField.text, out int levelNum) && levelNum > 0)
+            {
+                return levelNum;
+            }
+            
+            return 0;
         }
     }
 }
+#endif

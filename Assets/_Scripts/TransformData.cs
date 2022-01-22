@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class TransformData
 {
-    private Vector3 _position, _rotation;
+    public Vector3 position, rotation;
 
-    public TransformData(Vector3 position, Vector3 rotation)
+    public TransformData(Vector3 pos, Vector3 rot)
     {
-        _position = position;
-        _rotation = rotation;
+        position = pos;
+        rotation = rot;
     }
 }

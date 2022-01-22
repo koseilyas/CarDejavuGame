@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace LevelEditor
         private void OnMouseDown()
         {
             OnClicked?.Invoke(transform);
-            LevelEditorLogger.Log(name,false);
+            EditorLogger.Log(name,false);
         }
 
         void OnMouseDrag()
@@ -34,3 +35,4 @@ namespace LevelEditor
         
     }
 }
+#endif

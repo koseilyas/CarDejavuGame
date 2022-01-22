@@ -3017,9 +3017,10 @@ MonoBehaviour:
   - {fileID: 712785014}
   - {fileID: 470434662}
   _cloneObstaclesParent: {fileID: 972870510}
-  _saveButton: {fileID: 199198187}
-  _loadButton: {fileID: 524980092}
+  _saveButton: {fileID: 524980092}
+  _loadButton: {fileID: 199198187}
   _logText: {fileID: 992112260}
+  _levelInputField: {fileID: 1893857925}
 --- !u!4 &1250599769
 Transform:
   m_ObjectHideFlags: 0
