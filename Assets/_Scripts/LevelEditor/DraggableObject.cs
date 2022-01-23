@@ -29,6 +29,7 @@ namespace LevelEditor
         Vector3 GetMousePos() {
             Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
+            mousePos = mousePos.Snap(0.2f);
             return mousePos;
         }
 
