@@ -12,13 +12,15 @@ namespace GameScene
 
         public void InitTransforms()
         {
-            foreach (var car in cars)
+            for (var i = 0; i < cars.Length; i++)
             {
-                car.gameElementTransformation = new GameElementTransformation(car.transform);
-            }
-            foreach (var flag in flags)
-            {
+                var car = cars[i];
+                var flag = flags[i];
                 flag.gameElementTransformation = new GameElementTransformation(flag.transform);
+                car.gameElementTransformation = new GameElementTransformation(car.transform);
+                car.SetReachPoint(flag);
+                car.gameObject.SetActive(true);
+                flag.gameObject.SetActive(true);
             }
         }
     }

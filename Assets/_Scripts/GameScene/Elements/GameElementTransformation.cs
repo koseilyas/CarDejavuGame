@@ -25,12 +25,22 @@ namespace GameScene
         public void SetIdlePositionAndRotation(TransformData transformData)
         {
             idleTransformData = transformData;
-            SetPositionAndRotation(idleTransformData);
+            MoveToIdlePosition();
         }
 
         public void SetPlayingPositionAndRotation(TransformData transformData)
         {
             playingStartTransformData = transformData;
+            MoveToPlayingPosition();
+        }
+
+        public void MoveToIdlePosition()
+        {
+            SetPositionAndRotation(idleTransformData);
+        }
+
+        public void MoveToPlayingPosition()
+        {
             SetPositionAndRotation(playingStartTransformData);
         }
     }

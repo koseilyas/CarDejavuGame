@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2160933800345127264}
   - component: {fileID: 3021649514997254433}
   - component: {fileID: 8270353073713415563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,10 +91,10 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7093062820000746267}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0047071725, y: -0.007845253}
@@ -122,3 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba3afdc2a3c4df5af469261549126e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameElementTransformation:
+    idleTransformData:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    playingStartTransformData:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+  _collider: {fileID: 3021649514997254433}

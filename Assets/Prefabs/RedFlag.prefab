@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5340864008444795228}
   - component: {fileID: 7466538698516069619}
   - component: {fileID: 5878282751854200934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5340864008444795229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -124,6 +124,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b6dea496f14e028b34fccb2bd5333c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameElementTransformation:
+    idleTransformData:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    playingStartTransformData:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+  _collider: {fileID: 7466538698516069619}
 --- !u!1 &5340864008510667826
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5340864008510667825}
   - component: {fileID: 5340864008510667824}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TextBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +225,7 @@ GameObject:
   - component: {fileID: 5340864008905999317}
   - component: {fileID: 5340864008905999315}
   - component: {fileID: 5340864008905999316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlagNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
