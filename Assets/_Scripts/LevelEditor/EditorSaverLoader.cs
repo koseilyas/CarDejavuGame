@@ -7,7 +7,7 @@ namespace LevelEditor
 {
     public static class EditorSaverLoader
     {
-        private static string levelPath = "Assets/Levels/";
+        private static string levelPath = "Assets/Resources/Levels/";
         public static void Save(GameObject[] cars, GameObject[] flags, Transform cloneObstaclesParent, int levelNum)
         {
             LevelData levelData = ScriptableObject.CreateInstance<LevelData>();

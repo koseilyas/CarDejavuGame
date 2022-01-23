@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using GameScene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,10 @@ namespace LevelEditor
         {
             foreach (var car in _cars)
             {
+                if (car.TryGetComponent(out Car _car))
+                {
+                    Destroy(_car);
+                }
                 car.AddComponent<DraggableObject>();
             }
         }
@@ -37,6 +42,10 @@ namespace LevelEditor
         {
             foreach (var flag in _flags)
             {
+                if (flag.TryGetComponent(out Flag _flag))
+                {
+                    Destroy(_flag);
+                }
                 flag.AddComponent<DraggableObject>();
             }
         }
@@ -45,6 +54,10 @@ namespace LevelEditor
         {
             foreach (var obstacle in _obstacles)
             {
+                if (obstacle.TryGetComponent(out Obstacle _obstacle))
+                {
+                    Destroy(_obstacle);
+                }
                 CloneOnClick cloneOnClick = obstacle.AddComponent<CloneOnClick>();
                 cloneOnClick.Initialize(obstacle,_cloneObstaclesParent);
             }
