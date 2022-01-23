@@ -7,14 +7,20 @@ namespace GameScene
     {
         public static event Action<bool,bool> OnRotate;
         private bool _leftPressed, _rightPressed;
-        public float halfScreenWidth = Screen.width/2f;
+        public float halfScreenWidth;
+
+        private void Start()
+        {
+            halfScreenWidth = Screen.width / 2f;
+        }
+
         private void Update()
         {
-            #if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR
                 CheckKeyboardInput();
-            #elif UNITY_ANDROID || UNITY_IOS
+#elif UNITY_ANDROID || UNITY_IOS
                 CheckTouchInput();
-            #endif
+#endif
         }
 
         private void CheckKeyboardInput()
@@ -42,6 +48,11 @@ namespace GameScene
             }
         }
 
+        private void OnDisable()
+        {
+            OnRotate = null;
+        }
+
         private void CheckTouchInput()
         {
             if (Input.touchCount > 0)
@@ -49,12 +60,22 @@ namespace GameScene
                 var touch = Input.GetTouch(0);
                 if (touch.position.x < halfScreenWidth)
                 {
+                    _rightPressed = false;
+                    _leftPressed = true;
                     OnRotate?.Invoke(_leftPressed,_rightPressed);
                 }
                 else if (touch.position.x > halfScreenWidth)
                 {
+                    _rightPressed = true;
+                    _leftPressed = false;
                     OnRotate?.Invoke(_leftPressed,_rightPressed);
                 }
+            }
+            else
+            {
+                _rightPressed = false;
+                _leftPressed = false;
+                OnRotate?.Invoke(_leftPressed,_rightPressed);
             }
         }
     }

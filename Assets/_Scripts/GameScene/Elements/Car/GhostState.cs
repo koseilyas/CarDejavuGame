@@ -7,17 +7,24 @@ namespace GameScene
     {
         private Car _car;
         private CarRecordData _carRecordData;
+        private readonly SpriteRenderer _spriteRenderer;
+        private readonly Sprite _blackCar;
         private bool _canGhostsMove;
         private Transform _transform;
 
-        public GhostState(Car car, CarRecordData carRecordData)
+        public GhostState(Car car, CarRecordData carRecordData, SpriteRenderer spriteRenderer, Sprite blackCar)
         {
             _car = car;
             _carRecordData = carRecordData;
+            _spriteRenderer = spriteRenderer;
+            _blackCar = blackCar;
             DrivingState.OnDriveStarted += StartGhostDriving;
         }
+        
+
         public void Enter()
         {
+            _spriteRenderer.sprite = _blackCar;
             _transform = _car.transform;
             ResetToStartPosition();
         }

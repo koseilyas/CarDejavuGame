@@ -23,7 +23,7 @@ namespace LevelEditor
             _saveButton.onClick.AddListener(SaveLevel);
             _loadButton.onClick.AddListener(LoadLevel);
             new EditorLogger(_logText);
-            editorObjectLoader = new EditorObjectLoader(_cars,_flags);
+            editorObjectLoader = new EditorObjectLoader(_cars,_flags,_obstacles);
         }
 
         private void SetupCars()
@@ -68,13 +68,17 @@ namespace LevelEditor
             int levelNum  = GetLevelInput();
             if (levelNum > 0)
             {
+                int obstacleChildrenCount = _cloneObstaclesParent.childCount;
+                for (int i = 0; i < obstacleChildrenCount; i++)
+                {
+                    Destroy(_cloneObstaclesParent.GetChild(i).gameObject);
+                }
                 EditorSaverLoader.Load(levelNum,this);
             }
             else
             {
                 EditorLogger.Log("Input valid levelNumber",true);
             }
-            
         }
 
         private void SaveLevel()
@@ -103,6 +107,19 @@ namespace LevelEditor
             }
             
             return 0;
+        }
+
+        public void SpawnObstacleAtPosition(TransformData obstacleData)
+        {
+            GameObject obstacle = Instantiate(_obstacles[0], _cloneObstaclesParent);
+            obstacle.transform.position = obstacleData.position;
+            obstacle.transform.rotation = Quaternion.Euler(obstacleData.rotation);
+            if (obstacle.TryGetComponent(out CloneOnClick cloneOnClick))
+            {
+                Destroy(cloneOnClick);
+            }
+
+            DraggableObject draggableObject = obstacle.AddComponent<DraggableObject>();
         }
     }
 }

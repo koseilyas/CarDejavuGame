@@ -22,13 +22,19 @@ namespace LevelEditor
 
         private void OnMouseDown()
         {
+            Spawn();
+        }
+
+        public void Spawn()
+        {
             GameObject obstacle = Instantiate(_prefab, _parent);
             obstacle.transform.position = Vector3.zero;
             if (obstacle.TryGetComponent(out CloneOnClick cloneOnClick))
             {
                 Destroy(cloneOnClick);
             }
-            DraggableObject draggableObject =  obstacle.AddComponent<DraggableObject>();
+
+            DraggableObject draggableObject = obstacle.AddComponent<DraggableObject>();
         }
     }
 }

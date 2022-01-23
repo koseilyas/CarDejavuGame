@@ -1,28 +1,30 @@
-using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameScene
 {
     public class GameManager : MonoBehaviour
     {
-        private LevelLoader _levelLoader;
-        public ElementReferences elementReferences;
-        public static GameManager Instance;
+        private static int _level = 1;
         private CarsController _carsController;
-        public static event Action OnLevelStart;
+        public ElementReferences elementReferences;
 
         private void Awake()
         {
-            Instance = this;
             elementReferences.InitTransforms();
-            _levelLoader = new LevelLoader(1,elementReferences);
-            _carsController = new CarsController(elementReferences.cars);
+            var levelLoader = new LevelLoader(_level,elementReferences);
+            _carsController = new CarsController(elementReferences.cars,this);
         }
 
         private void Start()
         {
-            OnLevelStart?.Invoke();
             _carsController.StartCar(0);
+        }
+
+        public void NextLevel()
+        {
+            _level++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace GameScene
         private Car _car;
         private Rigidbody2D _rb;
         private CarRecordData _carRecordData;
+        private SpriteRenderer _spriteRenderer;
+        private Sprite _greenCar;
         private float _startMoveTime = 1f;
         private bool _canMove = false;
         private int _rotateDirection ;
@@ -18,16 +20,20 @@ namespace GameScene
         
         public static event Action OnDriveStarted;
 
-        public DrivingState(Car car, Rigidbody2D rb, CarRecordData carRecordData)
+        public DrivingState(Car car, Rigidbody2D rb, CarRecordData carRecordData, SpriteRenderer spriteRenderer, Sprite greenCar)
         {
             _car = car;
             _rb = rb;
             _transform = _rb.transform;
             _carRecordData = carRecordData;
+            _spriteRenderer = spriteRenderer;
+            _greenCar = greenCar;
             InputManager.OnRotate += RotateInput;
         }
+        
         public void Enter()
         {
+            _spriteRenderer.sprite = _greenCar;
             _canMove = false;
             
         }

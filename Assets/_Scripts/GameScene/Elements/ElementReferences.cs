@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameScene
@@ -7,8 +7,9 @@ namespace GameScene
     {
         public Car[] cars;
         public Flag[] flags;
-        public Obstacle[] obstacles;
-        [SerializeField] private GameObject treePrefab, barrelPrefab;
+        public List<Obstacle> obstacles;
+        [SerializeField] private Obstacle barrelPrefab;
+        [SerializeField] private Transform _cloneObstaclesParent;
 
         public void InitTransforms()
         {
@@ -22,6 +23,15 @@ namespace GameScene
                 car.gameObject.SetActive(true);
                 flag.gameObject.SetActive(true);
             }
+        }
+
+        public void SpawnObstacleAtPoint(TransformData transformData)
+        {
+            var obstacle = Instantiate(barrelPrefab, _cloneObstaclesParent);
+            obstacle.transform.position = transformData.position;
+            obstacle.transform.rotation = Quaternion.Euler(transformData.rotation);
+            obstacle.gameElementTransformation = new GameElementTransformation(obstacle.transform);
+            obstacles.Add(obstacle);
         }
     }
 }

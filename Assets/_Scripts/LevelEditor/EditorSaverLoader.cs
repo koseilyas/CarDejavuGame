@@ -32,7 +32,7 @@ namespace LevelEditor
             Selection.activeObject = levelData;
         }
 
-        public static void Load(int levelNum,EditorManager editorManager)
+        public static void Load(int levelNum, EditorManager editorManager)
         {
             var levelData = AssetDatabase.LoadAssetAtPath<LevelData>($"{levelPath}Level{levelNum}.asset");
             for (var i = 0; i < levelData.cars.Count; i++)
@@ -45,6 +45,12 @@ namespace LevelEditor
             {
                 var flag = levelData.flags[i];
                 editorManager.editorObjectLoader.SetFlagPosition(flag,i);
+            }
+            
+            for (var i = 0; i < levelData.obstacles.Count; i++)
+            {
+                var obstacle = levelData.obstacles[i];
+                editorManager.SpawnObstacleAtPosition(obstacle);
             }
         }
 

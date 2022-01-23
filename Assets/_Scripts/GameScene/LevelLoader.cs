@@ -6,7 +6,6 @@ namespace GameScene
 {
     public class LevelLoader
     {
-        private int _level;
         private ElementReferences _elementReferences;
         private string _path = "Levels/";
 
@@ -14,10 +13,13 @@ namespace GameScene
     
         public LevelLoader(int level,ElementReferences elementReferences)
         {
-            _level = level;
             _elementReferences = elementReferences;
 
             var levelData = Resources.Load<LevelData>($"{_path}Level{level}");
+            if (levelData == null)
+            {
+                levelData = Resources.Load<LevelData>($"{_path}Level{3}");
+            }
             LoadLevel(levelData);
         }
 
@@ -32,7 +34,13 @@ namespace GameScene
             {
                 _elementReferences.flags[i].gameElementTransformation.playingStartTransformData = levelData.flags[i];
             }
-            
+
+            for (var i = 0; i < levelData.obstacles.Count; i++)
+            {
+                var obstacle = levelData.obstacles[i];
+                _elementReferences.SpawnObstacleAtPoint(obstacle);
+            }
+
             OnLevelLoaded?.Invoke();
         }
     }

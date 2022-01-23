@@ -10,6 +10,8 @@ namespace GameScene
         private CarRecordData _carRecordData;
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Collider2D _collider;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite _blackCar, _greenCar;
         private static int _currentCarIndex;
         
         public GameElementTransformation gameElementTransformation;
@@ -35,6 +37,7 @@ namespace GameScene
         private void OnDisable()
         {
             DrivingState.OnDriveStarted -= EnableCollision;
+            _currentCarIndex = 0;
         }
         
         private void OnTriggerEnter2D(Collider2D col)
@@ -58,8 +61,8 @@ namespace GameScene
         private void InitializeStates()
         {
             idleState = new IdleState(this);
-            drivingState = new DrivingState(this, _rb, _carRecordData);
-            ghostState = new GhostState(this, _carRecordData);
+            drivingState = new DrivingState(this, _rb, _carRecordData,_spriteRenderer,_greenCar);
+            ghostState = new GhostState(this, _carRecordData,_spriteRenderer,_blackCar);
             teleportingState = new TeleportingState(this, _destinationFlag);
             restartState = new RestartState(this);
         }

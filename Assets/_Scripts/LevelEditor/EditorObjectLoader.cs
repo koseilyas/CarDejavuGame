@@ -6,11 +6,13 @@ namespace LevelEditor
     {
         private GameObject[] _cars;
         private GameObject[] _flags;
+        private GameObject[] _obstacles;
 
-        public EditorObjectLoader(GameObject[] cars, GameObject[] flags)
+        public EditorObjectLoader(GameObject[] cars, GameObject[] flags, GameObject[] obstacles)
         {
             _cars = cars;
             _flags = flags;
+            _obstacles = obstacles;
         }
 
         public void SetCarPosition(TransformData transformData, int index)

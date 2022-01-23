@@ -39,11 +39,8 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 506c6ca0280af4267ad748c6be9ed433, type: 3}
   - {fileID: 21300000, guid: 85f2cec0b72e64ad9afec96d332b4ab3, type: 3}
-  - {fileID: 21300000, guid: 6b04c67461bc54eb2bfcb5cfcf4548e2, type: 3}
-  - {fileID: 21300000, guid: bd25968477cf0456bb318c5d48ee8482, type: 3}
   - {fileID: 21300000, guid: a7a5e0a40979b4416b1ed1b535a6d19b, type: 3}
   - {fileID: 21300000, guid: 323e98e4b563546ce9551173b77f2888, type: 3}
-  - {fileID: 21300000, guid: 9661ad45bfa48462888c1f8ff5d74f93, type: 3}
   - {fileID: 21300000, guid: f97379858823f4a89b39ad31175251f4, type: 3}
   - {fileID: 21300000, guid: 65931227472ac477bb085222d6bf4dd0, type: 3}
   - {fileID: 21300000, guid: 339dcf6982a6c471dbd66f777582a104, type: 3}
@@ -52,11 +49,8 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - Corner
   - CarBlack
-  - BarrelBlue
-  - Tree
   - CarGreen
   - GreenButton
-  - Character
   - BarrelRed
   - Side
   - RedFlag
