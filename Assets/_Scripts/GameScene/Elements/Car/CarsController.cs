@@ -3,13 +3,13 @@ namespace GameScene
 {
     public class CarsController
     {
-        
-        public Car[] cars;
+        private Car[] _cars;
+        private int _lastCarIndex;
 
         public CarsController(Car[] carsArr)
         {
-            cars = carsArr;
-            Car.OnCarReachedTarget += NextCar;
+            _cars = carsArr;
+            Car.OnCarStateReset += NextCar;
         }
 
         private void NextCar(int carIndex)
@@ -19,15 +19,18 @@ namespace GameScene
 
         public void StartCar(int carIndex)
         {
-            for (int i = 0; i < cars.Length; i++)
+            for (int i = 0; i < _cars.Length; i++)
             {
-                Car car = cars[i];
+                Car car = _cars[i];
                 if (i < carIndex)
                 {
-                    car.ChangeState(car.ghostState);
+                    car.ChangeState(car.restartState);
                 }else if (i == carIndex)
                 {
                     car.ChangeState(car.teleportingState);
+                }else if (i > carIndex)
+                {
+                    car.ChangeState(car.idleState);
                 }
             }
         }

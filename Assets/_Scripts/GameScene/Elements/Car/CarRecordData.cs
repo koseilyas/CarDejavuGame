@@ -18,12 +18,18 @@ namespace GameScene
             _index = 0;
         }
 
+        public void Restart()
+        {
+            _transformSet.Clear();
+            _index = 0;
+        }
+
         public TransformData GetNextTransform()
         {
             _index++;
             if(_index < _transformSet.Count)
                 return _transformSet[_index];
-            return _transformSet.LastOrDefault();
+            return null;
         }
     }
 }

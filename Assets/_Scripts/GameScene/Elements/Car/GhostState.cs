@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GameScene
@@ -7,15 +8,27 @@ namespace GameScene
         private Car _car;
         private CarRecordData _carRecordData;
         private bool _canGhostsMove;
+        private Transform _transform;
 
         public GhostState(Car car, CarRecordData carRecordData)
         {
             _car = car;
             _carRecordData = carRecordData;
+            DrivingState.OnDriveStarted += StartGhostDriving;
         }
         public void Enter()
         {
-            DrivingState.OnDriveStarted += StartGhostDriving;
+            _transform = _car.transform;
+            ResetToStartPosition();
+        }
+
+        private void ResetToStartPosition()
+        {
+            TransformData startData = _car.gameElementTransformation.playingStartTransformData;
+            _transform.position = startData.position;
+            _transform.rotation = Quaternion.Euler(startData.rotation);
+            _carRecordData.Reset();
+            _canGhostsMove = false;
         }
 
         public void UpdateState()
@@ -28,14 +41,28 @@ namespace GameScene
             if (_canGhostsMove)
             {
                 var nextTransformData = _carRecordData.GetNextTransform();
-                _car.transform.position = nextTransformData.position;
-                _car.transform.rotation = Quaternion.Euler(nextTransformData.rotation);
+                if (nextTransformData == null)
+                {
+                    Exit();
+                    return;
+                }
+                _transform.position = nextTransformData.position;
+                _transform.rotation = Quaternion.Euler(nextTransformData.rotation);
             }
         }
 
         public void Exit()
         {
-            DrivingState.OnDriveStarted -= StopGhostDriving;
+            SetLastLocation();
+            StopGhostDriving();
+        }
+
+        private void SetLastLocation()
+        {
+            _car.gameElementTransformation.idleTransformData = new TransformData(
+                _transform.position,
+                _transform.rotation.eulerAngles
+            );
         }
 
         private void StopGhostDriving()
